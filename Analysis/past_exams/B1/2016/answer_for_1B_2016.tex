@@ -155,21 +155,21 @@
         \begin{enumerate}
             \item 
             \begin{equation*}
-                \varphi(x,y,z)=\exp{-x^{2}-y^{2}}-z
+                \varphi(x,y,z)=\exp{(-x^{2}-y^{2})}-z
             \end{equation*}
             とおくと, 問題の曲面は\(\varphi=0\)で表される曲面である. この曲面の法線ベクトルは
             \begin{equation*}
-                \nabla f=\begin{bmatrix}
-                    -2x\exp{-x^{2}-y^{2}}\\
-                    -2y\exp{-x^{2}-y^{2}}\\
+                \nabla \varphi=\begin{bmatrix}
+                    -2x\exp{(-x^{2}-y^{2})}\\
+                    -2y\exp{(-x^{2}-y^{2})}\\
                     -1
                 \end{bmatrix}
             \end{equation*}
             從って求める単位法線ベクトルは
             \begin{equation*}
                 \bm{n}=\frac{1}{\sqrt{4(x^{2}+y^{2})\exp{(-2(x^{2}+y^{2}))}+1}}\begin{bmatrix}
-                    2x\exp{-x^{2}-y^{2}}\\
-                    2y\exp{-x^{2}-y^{2}}\\
+                    2x\exp{(-x^{2}-y^{2})}\\
+                    2y\exp{(-x^{2}-y^{2})}\\
                     1
                 \end{bmatrix}
             \end{equation*}
@@ -183,9 +183,22 @@
             \end{equation*}
             だから
             \begin{equation*}
-                \bm{f}\cdot\bm{n}=
+                \bm{f}\cdot\bm{n}=\frac{\{2(x^{2}+y^{2})+1\}\exp{(-(x^{2}+y^{2}))}}{\sqrt{4(x^{2}+y^{2})\exp{(-2(x^{2}+y^{2}))}+1}}
+            \end{equation*}
+            從って求める面積分は
+            \begin{equation*}
+            S=\iint_{\mathcal{D}}\frac{\{2(x^{2}+y^{2})+1\}\exp{(-(x^{2}+y^{2}))}}{\sqrt{4(x^{2}+y^{2})\exp{(-2(x^{2}+y^{2}))}+1}}dxdy
+            \end{equation*}
+            ここで
+            \begin{equation*}
+                x=r\cos{x},y=\sin{x}
+            \end{equation*}
+            と変数変換すると, 
+            \begin{equation*}
+                S=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}rdr\frac{(2r^{2}+1)\exp{(-r^{2})}}{\sqrt{4r^{2}\exp{(-2r^{2})}+1}}=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}\frac{(2r^{2}+1)rdr}{\sqrt{4r^{2}+\exp{2r^{2}}}}
             \end{equation*}
         \end{enumerate}
+        \item ストークスの定理から
     \end{enumerate}
     %
 \end{document}
