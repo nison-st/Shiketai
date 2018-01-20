@@ -54,7 +54,7 @@
         \end{equation*}
         ここで
         \begin{equation*}
-            x^{3}-x^{2}-x+1=(x-1)^{2}(x+1)
+            x^{3}-x^{2}-x+1={(x-1)}^{2}(x+1)
         \end{equation*}
         だから
         \begin{equation*}
@@ -115,12 +115,77 @@
             I=\int_{0}^{1}\left(\int_{0}^{\sqrt[3]{x}}\frac{y^{2}}{x\sqrt{2-x}}dy\right)dx+\int_{1}^{2}\left(\int_{0}^{\sqrt{2-x}}\frac{y^{2}}{x\sqrt{2-x}}dy\right)dx
         \end{equation*}
         \begin{equation*}
-            =\int_{0}^{1}\frac{1}{3\sqrt{2-x}}dx+\int_{1}^{2}\frac{2-x}{3x}dx={\left[-\frac{2}{3}\sqrt{2-x}\right]}_{0}^{1}+\left[\frac{2}{3}\log{}x\right]_{1}^{2}-\left[\frac{1}{3}x\right]_{1}^{2}
+            =\int_{0}^{1}\frac{1}{3\sqrt{2-x}}dx+\int_{1}^{2}\frac{2-x}{3x}dx={\left[-\frac{2}{3}\sqrt{2-x}\right]}_{0}^{1}+{\left[\frac{2}{3}\log{}x\right]}_{1}^{2}-{\left[\frac{1}{3}x\right]}_{1}^{2}
         \end{equation*}
         \begin{equation*}
             =\frac{2}{3}(\sqrt{2}+\log{2})-1
         \end{equation*}
         \item 
+        \begin{equation*}
+            \mathcal{D}:=\{(x,y)\mid{}x^{2}+y^{2}\leq4\}
+        \end{equation*}
+        \begin{equation*}
+            f_{x}=\frac{x}{2\sqrt{x^{2}+y^{2}}}\exp{\frac{\sqrt{x^{2}+y^{2}}}{2}}-\frac{x}{2\sqrt{x^{2}+y^{2}}}\exp-{\frac{\sqrt{x^{2}+y^{2}}}{2}}
+        \end{equation*}
+        \begin{equation*}
+            f_{y}=\frac{y}{2\sqrt{x^{2}+y^{2}}}\exp{\frac{\sqrt{x^{2}+y^{2}}}{2}}-\frac{y}{2\sqrt{x^{2}+y^{2}}}\exp-{\frac{\sqrt{x^{2}+y^{2}}}{2}}.
+        \end{equation*}
+        曲面積は
+        \begin{equation*}
+            S=\iint_{\mathcal{D}}\sqrt{1+f_{x}^{2}+f_{y}^{2}}dxdy=\iint_{\mathcal{D}}\sqrt{1+\frac{1}{4}{\left(\exp{\frac{\sqrt{x^{2}+y^{2}}}{2}}-\exp-{\frac{\sqrt{x^{2}+y^{2}}}{2}}\right)}^{2}}dxdy.
+        \end{equation*}
+        ここで
+        \begin{equation*}
+            x=r\cos{x},y=\sin{x}
+        \end{equation*}
+        と変数変換すると, 
+        \begin{equation*}
+            S=\int_{0}^{2\pi}d\theta\int_{0}^{2}rdr\sqrt{\frac{1}{2}+\frac{1}{4}\left(\exp{r}+\exp{(-r)}\right)}
+        \end{equation*}
+        \begin{equation*}
+            \int_{0}^{2\pi}d\theta\int_{0}^{2}rdr\frac{1}{2}\sqrt{\left(\exp{r}+2+\exp{(-r)}\right)}=\int_{0}^{2\pi}d\theta\int_{0}^{2}rdr\frac{1}{2}\left(\exp{\frac{r}{2}}+\exp{\frac{-r}{2}}\right)
+        \end{equation*}
+        \begin{equation*}
+            =\frac{1}{2}\int_{0}^{2\pi}d\theta{\left[2r\exp{\frac{r}{2}}-2\exp{\frac{r}{2}}-2r\exp{\frac{-r}{2}}+2\exp{\frac{-r}{2}}\right]}_{0}^{2}=\pi(4e-2e-4e^{-1}+2e^{-1})
+        \end{equation*}
+        \begin{equation*}
+            =2\pi(e-e^{-1})
+        \end{equation*}
+        \item 
+        \begin{enumerate}
+            \item 
+            \begin{equation*}
+                \varphi(x,y,z)=\exp{-x^{2}-y^{2}}-z
+            \end{equation*}
+            とおくと, 問題の曲面は\(\varphi=0\)で表される曲面である. この曲面の法線ベクトルは
+            \begin{equation*}
+                \nabla f=\begin{bmatrix}
+                    -2x\exp{-x^{2}-y^{2}}\\
+                    -2y\exp{-x^{2}-y^{2}}\\
+                    -1
+                \end{bmatrix}
+            \end{equation*}
+            從って求める単位法線ベクトルは
+            \begin{equation*}
+                \bm{n}=\frac{1}{\sqrt{4(x^{2}+y^{2})\exp{(-2(x^{2}+y^{2}))}+1}}\begin{bmatrix}
+                    2x\exp{-x^{2}-y^{2}}\\
+                    2y\exp{-x^{2}-y^{2}}\\
+                    1
+                \end{bmatrix}
+            \end{equation*}
+            \item 
+            \begin{equation*}
+                \bm{f}=\begin{bmatrix}
+                    x\\
+                    y\\
+                    z
+                \end{bmatrix}
+            \end{equation*}
+            だから
+            \begin{equation*}
+                \bm{f}\cdot\bm{n}=
+            \end{equation*}
+        \end{enumerate}
     \end{enumerate}
     %
 \end{document}
