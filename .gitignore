@@ -1,0 +1,6 @@
+#.gitignore 
+*.div
+*.aux
+*.log
+*.gz
+*.toc

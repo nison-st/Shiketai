@@ -1,0 +1,1483 @@
+\documentclass[a4paper,10pt,report]{amsart}
+    \usepackage{framed,cases,cleveref,empheq,newtxtext,newtxmath}
+    \usepackage[dvipdfmx]{graphicx}
+    %
+    \makeatletter
+        \renewcommand{\theequation}{% 式番号の付け方
+        \thesection.\arabic{equation}}
+        \@addtoreset{equation}{section}
+    
+        \renewcommand{\thefigure}{% 図番号の付け方
+        \thesection.\arabic{figure}}
+        \@addtoreset{figure}{section}
+        \renewcommand{\thetable}{% 表番号の付け方
+        \thesection.\arabic{table}}
+        \@addtoreset{table}{section}
+    \makeatother
+    %
+    \theoremstyle{plain}
+    \newtheorem{thm}{Thm.}[section]
+    \newtheorem{lem}{Lem.}[section]
+    \newtheorem{cor}{Cor.}[section]
+    \crefname{cor}{Corollary}{Corollaries}
+    \newtheorem{prop}{Prop.}[section]
+    \crefname{prop}{Proposition}{Propositions}
+
+    %
+    \theoremstyle{definition}
+    \newtheorem{defn}{Def.}[section]
+    \crefname{defn}{Definition}{Definitions}
+    \newtheorem{req}{Req.}[section]
+    \crefname{req}{Requirement}{Requirements}
+    %
+    \theoremstyle{remark}
+    \newtheorem{rem}{Rem}
+    \newtheorem{prf}{Prf.}
+%
+    \let\normalref\ref
+    \renewcommand{\ref}{\cref}
+    \newcommand{\Tabref}[1]{表\ref{#1}}
+    \newcommand{\Equref}[1]{式 (\ref{#1})}
+    \newcommand{\Figref}[1]{図\ref{#1}}
+    %
+    %
+    \title{Linear Algebra}
+    \author{Powered by maphycs}
+    \date{\today}
+    %
+    \begin{document}
+    \maketitle
+    \tableofcontents
+\part{ベクトル空間}
+\section{アーベル群, 左K加群}
+\begin{leftbar}
+    \begin{defn}アーベル群[abelian group]\par
+    集合\(A\)が演算\(*\)について以下の性質を持つとき, \(A\)を
+    演算\(*\)について\textbf{アーベル群[abelian group]}または
+    \textbf{可換群[commutative group]}であるという. 
+    \begin{enumerate}
+        \item 交換律
+        \begin{equation*}
+            a, b\in A\Rightarrow a*b=b*a
+        \end{equation*}
+        \item 結合律
+        \begin{equation*}
+            a, b, c\in A\Rightarrow(a*b)*c=a*(b*c)
+        \end{equation*}
+        \item 単位元の存在
+        \begin{equation*}
+            \exists 1\in A, \forall a\in A, a*1=a
+        \end{equation*}
+        \item 逆元の存在
+        \begin{equation*}
+            \exists -a\in A,a*(-a)=1
+        \end{equation*}
+    \end{enumerate}
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}左\(K\)加群\par
+        集合\(M\)がアーベル加群で, \(K\)を環として以下の性質を満たすとき, 
+        \(M\)は\textbf{左\(K\)加群[left K-module]}という. 
+        \begin{enumerate}
+            \item 分配法則
+            \begin{equation*}
+                \lambda \in K\wedge x, y\in M\Rightarrow \lambda(x+y)=\lambda x+\lambda y
+            \end{equation*}
+            \begin{equation*}
+                \lambda \in K\wedge x\in M\Rightarrow (\lambda+\mu)x=\lambda x+\mu x
+            \end{equation*}
+            \item 結合律
+            \begin{equation*}
+                \lambda,\mu \in K\wedge x\in M\Rightarrow (\lambda\mu) x=\lambda(\mu x)
+            \end{equation*}
+            \item \(K\)の単位元との関係
+            \begin{equation*}
+                x\in M\Rightarrow1_{K}x=x
+            \end{equation*}
+            ただし\(1_{K}\)は\(K\)の乗法単位元. 
+        \end{enumerate}
+    \end{defn}
+\end{leftbar}
+\section{ベクトル空間}
+\begin{leftbar}
+    \begin{defn}ベクトルの公理\par
+        \(K\)を体とする. 集合\(V\)について,
+        \begin{align*}
+            x, y\in V\Rightarrow x+y\in V\\
+            \lambda\in K\wedge x\in V\Rightarrow \lambda x\in V
+        \end{align*}
+        が成り立ち, 左\(K\)加群であるような集合\(V\)を体\(K\)上の
+        \textbf{ベクトル空間[vector space]}という. ベクトル空間\(V\)の元を\textbf{ベクトル[vector]}といい, 
+        体\(K\)の元を\textbf{スカラー[scalar]}という. 
+    \end{defn}
+\end{leftbar}
+ベクトル・スカラーの順の積は定義されない.  
+\begin{leftbar}
+    \begin{prop}\label{prop::characteristics_of_a_vector_space_as_a_module}ベクトル空間の加群としての性質\par
+        \(x\in V\)として
+        \begin{enumerate}
+            \item \(V\)の零元\(0_{V}\)は唯一つ存在する. 
+            \item \(x\)の加法の逆元\(-x\in V\)がただ一つ存在する.
+            \item \(-(-x)=x\). 
+        \end{enumerate}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \begin{enumerate}
+        \item \(0,0'\)が共に\(V\)の零元だと仮定する. 
+        仮定と零元の定義から,
+        \begin{equation*}
+            0=0+0'=0'
+        \end{equation*}
+        \begin{equation*}
+            \therefore 0=0'.
+        \end{equation*}
+        \qed{}
+        \item \(y,y'\in V\)を共に\(x\in V\)の逆元と仮定する. 
+        仮定と逆元の性質, 結合法則から, 
+        \begin{equation*}
+            y=y+0_{V}=y+(x+y')=(y+x)+y'=0_{V}+y'=y'
+        \end{equation*}
+        \begin{equation*}
+            \therefore y=y'.
+        \end{equation*}
+        \qed{}
+        \item \(-(-x)\)は\(-x\)の逆元である. また, 
+        \begin{equation*}
+            x+(-x)=0_{V}
+        \end{equation*}
+        だから, \(x\)も\(-x\)の逆元である. 從って逆元の一意性から,
+        \begin{equation*}
+            -(-x)=x.
+        \end{equation*}
+        \qed{}
+    \end{enumerate}
+\end{prf}
+\begin{leftbar}
+    \begin{defn}3つ以上のベクトルの和\par
+        結合律より, \(x,y,z\in V\)とすると
+        \begin{equation*}
+            (x+y)+z=x+(y+z)
+        \end{equation*}
+        だから, これらをまとめて
+        \begin{equation}
+            x+y+z
+        \end{equation}
+        と書く. 同様に3つ以上のベクトルの和も演算の順序に関わらず
+        \begin{equation}
+            x_{1}+x_{2}+\cdots+x_{n}
+        \end{equation}
+        と書く. また, これを省略して
+        \begin{equation}
+            \sum_{i=1}^{n}x_{i}
+        \end{equation}
+        と書く. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}\label{prop::characteristics_of_a_vector_space_as_a_left_K-module}ベクトル空間の左\(K\)加群としての性質\par
+        \(\lambda\in K, x\in V\)として
+        \begin{equation}
+            0_{K}x=\lambda 0_{V}=0_{V}
+        \end{equation}
+        \begin{equation}
+            \lambda x=0_{V}\Rightarrow \lambda=0_{K}\vee x=0_{V}
+        \end{equation}
+        \begin{equation}
+            \lambda(-x)=(-\lambda)x=-\lambda x
+        \end{equation}
+        \begin{equation}
+            (-\lambda)(-x)=\lambda x
+        \end{equation}
+        \begin{equation}
+            (-1_{K})x=-x
+        \end{equation}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \begin{enumerate}
+        \item 
+        \begin{equation*}
+            0_{K}x=(0_{K}+0_{K})x=0_{K}x+0_{K}x
+        \end{equation*}
+        両辺に\(-0_{K}x\in V\)を加えて, 
+        \begin{equation*}
+            \therefore 0_{K}x=0_{V}.
+        \end{equation*}
+        また, 
+        \begin{equation*}
+            \lambda 0_{V}=\lambda(0_{V}+0_{V})=\lambda0_{V}+\lambda0_{V}
+        \end{equation*}
+        \begin{equation*}
+            \lambda0_{V}=0_{V}
+        \end{equation*}
+        \begin{equation*}
+            \therefore 0_{K}x=\lambda 0_{V}=0_{V}.
+        \end{equation*}
+        \item 
+        \begin{equation}\label{eq::prf2-1}
+            \lambda x=0_{V}
+        \end{equation}
+        を仮定する. \(\lambda=0_{K}\)のとき, 
+        \begin{equation*}
+            \lambda=0_{K}\vee x=0_{V}.
+        \end{equation*}
+        \(\lambda\neq0_{K}\)のとき, \cref{eq::prf2-1}の両辺に右から\(\lambda^{-1}\)をかけると, 
+        \begin{equation*}
+            x=0_{V}
+        \end{equation*}
+        \begin{equation*}
+            \therefore \lambda=0_{K}\vee x=0_{V}.
+        \end{equation*}
+        以上より, 
+        \begin{equation*}
+            \lambda x=0_{V}\Rightarrow \lambda=0_{K}\vee x=0_{V}. 
+        \end{equation*}
+        \qed{}
+        \item 
+        \begin{equation*}
+            \lambda x+\lambda(-x)=\lambda(x+(-x))=\lambda0_{V}=0_{V}
+        \end{equation*}
+        \begin{equation*}
+            \therefore \lambda(-x)=-\lambda x.
+        \end{equation*}
+        また, 
+        \begin{equation*}
+            \lambda x+(-\lambda)x=(\lambda+(-\lambda))x=0_{K}x=0_{V}
+        \end{equation*}
+        \begin{equation*}
+            \therefore(-\lambda)x=-\lambda{}x.
+        \end{equation*}
+        以上より, 
+        \begin{equation*}
+            \lambda(-x)=(-\lambda)x=-\lambda x. 
+        \end{equation*}
+        \qed{}
+        \item 
+        \begin{equation*}
+            (-\lambda)(-x)+(-\lambda x)=(-\lambda)(-x)+(-\lambda)x=(-\lambda)(-x+x)=-\lambda0_{V}=0_{V}. 
+        \end{equation*}
+        逆元の一意性から
+        \begin{equation*}
+            (-\lambda)(-x)=\lambda x.
+        \end{equation*}
+        \qed{}
+        \item 
+        \begin{equation*}
+            (-1_{K})x=-1_{K}x.
+        \end{equation*}
+        ベクトルの公理から
+        \begin{equation*}
+            1_{K}x=x.
+        \end{equation*}
+        \begin{equation*}
+            \therefore(-1_{K})x=-x.
+        \end{equation*}
+        \qed{}
+    \end{enumerate}
+\end{prf}
+\begin{leftbar}
+    \begin{defn}部分ベクトル空間[linear subspace]\par
+        \(V\)の部分集合\(W\)が\(K\)上のベクトル空間となるとき, 
+        \(W\)を\(V\)の\textbf{部分ベクトル空間[vector subspace]}という.
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}\(W\)が\(V\)の部分ベクトル空間であることの必要十分条件.
+        \begin{equation*}
+            \mbox{\(W\)が\(V\)の部分ベクトル空間}\Leftrightarrow
+            \begin{cases}
+                W\subset V\\
+                x, y\in W\Rightarrow x+y\in W\\
+                \lambda\in K\wedge x\in W\Rightarrow \lambda x\in W
+            \end{cases}
+        \end{equation*}\label{prop:NSC_for_linear_subspace_1}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    (\(\Rightarrow \))\(W\)は\(V\)の部分ベクトル空間であると仮定する. 
+    定義より
+    \begin{equation*}
+        \begin{cases}
+            W\subset V\\
+            x, y\in W\Rightarrow x+y\in W\\
+            \lambda\in K\wedge x\in W\Rightarrow \lambda x\in W
+        \end{cases}
+    \end{equation*}
+    よって\(\Rightarrow{}\)は示せた. \\
+    (\(\Leftarrow{}\))
+    \begin{equation*}
+        \begin{cases}
+            W\subset V\\
+            x, y\in W\Rightarrow x+y\in W\\
+            \lambda\in K\wedge x\in W\Rightarrow \lambda x\in W
+        \end{cases}
+    \end{equation*}
+    を仮定すると, 
+    \begin{equation*}
+        \begin{cases}
+            x, y\in W\Rightarrow x+y\in W\\
+            \lambda\in K\wedge x\in W\Rightarrow \lambda x\in W
+        \end{cases}
+    \end{equation*}
+    であり, 任意の\(x\in W\)は\(x\in V\)でもあるから\(W\)の任意の元に関して
+    交換律, 結合律が成り立つ. 零元は\(0_{W}=0_{K}x=0_{V}\in W\), 逆元は\(-x=(-1_{K})x\)で定まるので, \(W\)は
+    加法に関してアーベル群である.  また, \(\lambda, \mu\in K\wedge{}x,y\in W\)として, 
+    \(x,y\in V\)だから, \(W\)は左\(K\)加群の定義を満たす. 
+    從って\(W\)は\(K\)上のベクトル空間かつ\(W\subset V\)なので\(V\)の部分ベクトル空間である. 
+    \qed{}
+\end{prf}
+\begin{leftbar}
+    \begin{prop}\label{prop::NSC_for_linear_subspace_2}\(W\)が\(V\)の部分ベクトル空間であることの必要十分条件. \par
+        \(V\)をベクトル空間として
+        \begin{equation*}
+            \mbox{\(W\)が\(V\)の部分ベクトル空間}\Leftrightarrow
+            \begin{cases}
+                W\subset V\\
+                \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+                0_{V}\in W
+            \end{cases}
+        \end{equation*}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \cref{prop:NSC_for_linear_subspace_1}から, 
+    \begin{equation*}
+        \begin{cases}
+            x, y\in W\Rightarrow x+y\in W\\
+            \lambda\in K\wedge x\in W\Rightarrow \lambda x\in W. 
+        \end{cases}
+        \Leftrightarrow
+        \begin{cases}
+            \lambda_{1},\lambda_{2}\in K\wedge x_{1},x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W. \\
+            0\in W
+        \end{cases}
+    \end{equation*}
+    を示せばよい. \\
+    \((\Rightarrow)\)
+    \begin{equation*}
+        \lambda_{1},\lambda_{2}\in K\wedge x_{1},x_{2}\in W
+    \end{equation*}
+    を仮定すると, 
+    \begin{align*}
+        \lambda_{1}x_{1},\lambda_{2}x_{2}\in W\\
+        \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+        \therefore \lambda_{1},\lambda_{2}\in K\wedge x_{1},x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W. 
+    \end{align*}
+    また, \(W\)はベクトル空間なので, \(0_{W}\in W\)である. \(x,-x\in W\)について\(x,-x\in V\)だから,
+    ベクトルの公理から
+    \begin{equation*}
+        0_{W}=x+(-x)=0_{V}.
+    \end{equation*}
+    從って
+    \begin{equation*}
+        \begin{cases}
+            \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+            0_{V}\in W
+        \end{cases}
+    \end{equation*}
+    が成り立つので\(\Rightarrow{}\)は示せた. \\
+    (\(\Leftarrow{}\))
+    \begin{equation*}
+        \begin{cases}
+            \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+            0_{V}\in W
+        \end{cases}
+    \end{equation*}
+    を仮定する. \(x,y\in W\)とすると, 仮定から
+    \begin{equation*}
+        1_{K}x+1_{K}y\in W
+    \end{equation*}
+    \begin{equation*}
+        x+y\in W
+    \end{equation*}
+    \begin{equation*}
+        \therefore x,y\in W\Rightarrow x+y\in W.
+    \end{equation*}
+    また, \(\lambda\in K,x\in W\)とすると, 仮定から, 
+    \begin{equation*}
+        \lambda x+0_{K}0_{V}\in W
+    \end{equation*}
+    \begin{equation*}
+        \lambda x\in W
+    \end{equation*}
+    \begin{equation*}
+        \therefore \lambda\in K\wedge x\in W\Rightarrow \lambda x\in W
+    \end{equation*}
+    以上より,
+    \begin{equation*}
+        \begin{cases}
+            x, y\in W\Rightarrow x+y\in W\\
+            \lambda\in K\wedge x\in W\Rightarrow \lambda x\in W
+        \end{cases}
+    \end{equation*}
+    從って\(\Leftarrow{}\)も示せた. 
+    \qed{}
+\end{prf}
+\begin{leftbar}
+    \begin{prop}\label{prop::NSC_for_linear_subspace_3}\(W\)が\(V\)の部分ベクトル空間であることの必要十分条件\par
+        \begin{equation*}
+            \mbox{\(W\)が\(V\)の部分ベクトル空間}\Leftrightarrow
+            \begin{cases}
+                W\subset V\\
+                \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+                W\neq \emptyset
+            \end{cases}
+        \end{equation*}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \cref{prop::NSC_for_linear_subspace_2}より, 
+    \begin{equation*}
+        \begin{cases}
+            \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+            0_{V}\in W
+        \end{cases}
+        \Leftrightarrow
+        \begin{cases}
+            \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+            W\neq\emptyset
+        \end{cases}
+    \end{equation*}
+    を示せばよい. \\
+    \((\Rightarrow)\)
+    \begin{equation*}
+        \begin{cases}
+            \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+            0_{V}\in W
+        \end{cases}
+    \end{equation*}
+    を仮定する. \(0_{V}\in W\)から\(W\neq\emptyset{}\)なので\(\Rightarrow{}\)は示せた. \\
+    \((\Leftarrow)\)
+    \begin{equation*}
+        \begin{cases}
+            \lambda_{1}, \lambda_{2}\in K\wedge x_{1}, x_{2}\in W\Rightarrow \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W\\
+            W\neq\emptyset
+        \end{cases}
+    \end{equation*}
+    を仮定する. \(W\neq\emptyset{}\)なので\(x\in W\)となる\(x\)が存在する. 
+    仮定より, 
+    \begin{equation*}
+        0_{K}x+0_{K}x=0_{V}\in W.
+    \end{equation*}
+    從って\(\Leftarrow{}\)も示せた.
+    \qed{}
+\end{prf}
+\section{線型結合と生成する部分ベクトル空間}
+\begin{leftbar}
+    \begin{cor}\label{cor::a_linear_combination_of_vectors_is_also_a_vector}ベクトルの線形結合もベクトル
+        \begin{equation}
+           \lambda_{1},\lambda_{2},\ldots,\lambda_{n}\in K\wedge
+           x_{1},x_{2},\ldots,x_{n}\in V\Rightarrow \sum_{i}\lambda_{i}x_{i}\in V
+        \end{equation}
+    \end{cor}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}線形結合\par
+        \(\lambda_{1},\ldots\lambda_{n}\in K\wedge x_{1},\ldots,x_{n}\in W\)として
+        \begin{equation}
+            x=\sum_{i}\lambda_{i}x_{i}
+        \end{equation}
+        を\(x_{1},\ldots,x_{n}\)の\textbf{線形結合[linear combination]}という.
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}生成する部分ベクトル空間\par
+        \(S\subset V\)の線形結合の集合
+        \begin{equation}
+            \mathcal{L}(S):=\left \{\sum_{i=1}^{n}\lambda_{i}a_{i}\middle|n\in\mathbb{N},\lambda_{i}\in K,a_{i}\in S\right \}
+        \end{equation}
+        を\textbf{\(S\)の生成する部分ベクトル空間[spanned set]}といい, 
+        \(S\)を\(\mathcal{L}(S)\)の\textbf{生成系[generating set]}という. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}諸定理
+        \begin{enumerate}
+            \item \(W_{a}(a\in A):V\)の部分ベクトル空間\(\Rightarrow\bigcap_{a\in A}W_{a}:V\)の部分ベクトル空間
+            \item \(S\subset V\)として\(\mathcal{L}(S)\)は\(V\)の部分ベクトル空間
+            \item \(\mathcal{L}(S)\)は\(S\)を含む最小の部分ベクトル空間
+        \end{enumerate}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \begin{enumerate}
+        \item 
+        \(W_{a}\)は\(V\)の部分集合と仮定する. \(W:=\bigcap_{a\in A}W_{a}:V\)とおく. 
+        \cref{prop::NSC_for_linear_subspace_2}から, 
+        \begin{equation*}
+            W\subset V. 
+        \end{equation*}
+        \begin{equation*}
+            0_{V}\in W_{a}
+        \end{equation*}
+        \begin{equation*}
+            \therefore 0_{V}\in W.
+        \end{equation*}
+        \(\lambda_{1}, \lambda_{2}\in K\wedge x_{1},x_{2}\in W\)とすると,
+        \begin{equation*}
+            \forall a\in A,x_{1},x_{2}\in W_{a}
+        \end{equation*}
+        \begin{equation*}
+            \forall a\in A,\lambda_{1}x_{1}+\lambda_{2}x_{2}\in W_{a}
+        \end{equation*}
+        \begin{equation*}
+            \lambda_{1}x_{1}+\lambda_{2}x_{2}\in W
+        \end{equation*}
+        \begin{equation*}
+            \therefore \lambda_{1}, \lambda_{2}\in K\wedge x_{1},x_{2}\in W\Rightarrow \lambda_{1}, \lambda_{2}\in K\wedge x_{1},x_{2}\in W
+        \end{equation*}
+        從って, \cref{prop::NSC_for_linear_subspace_2}から\(W\)は\(V\)の部分ベクトル空間だから示せた. 
+        \qed{}
+        \item \(S\subset V\wedge W:=\mathcal{L}(S)\)とする. \(x\in W\)は
+        \begin{equation*}
+            x=\sum_{i=1}^{n}\lambda_{i}a_{i},\lambda_{i}\in K,a_{i}\in S
+        \end{equation*}
+        で表されるから\cref{cor::a_linear_combination_of_vectors_is_also_a_vector}より
+        \(x\in V\)なので\(W\subset V\). また, \(y\in W\)とすると
+        \begin{equation*}
+            y=\sum_{i=1}^{m}\mu_{i}a'_{i},\mu_{i}\in K,a'_{i}\in W
+        \end{equation*}
+        で表される. \(\lambda,\mu\in K\)とすると, 
+        \begin{equation*}
+            \lambda x+\mu y=\lambda\lambda_{1}a_{1}+\cdots+\lambda\lambda_{n}a_{n}+\mu\mu_{1}a'_{1}+\cdots+\mu\mu_{n}a'_{n}. 
+        \end{equation*}
+        \(\mathcal{L}(S)\)の定義より\(\lambda x+\mu y\in W\)だから
+        \begin{equation*}
+            x,y\in W\wedge\lambda,\mu\in K\Rightarrow \lambda x+\mu y\in W
+        \end{equation*}
+        また, 
+        \begin{equation*}
+            0_{V}=\sum_{i=1}^{n}0_{K}a_{i}\in W
+        \end{equation*}
+        以上より\cref{prop::NSC_for_linear_subspace_2}から\(W\)は部分ベクトル空間. 
+        \qed{}
+        \item \(W\)を\(V\)の部分ベクトル空間として, 
+        \begin{equation*}
+            S\subset W\Rightarrow \mathcal{L}(S)\subset W
+        \end{equation*}
+        を示せばよい. \(S\subset W\)を仮定する. \(x\in\mathcal{L}(S)\)とすると, 
+        \begin{equation*}
+            x=\sum_{i=1}^{n}\lambda_{i}a_{i},\lambda_{i}\in K,a_{i}\in S
+        \end{equation*}
+        と表せる. \cref{cor::a_linear_combination_of_vectors_is_also_a_vector}より, 
+        \(x\in W\)だから
+        \begin{equation*}
+            \mathcal{L}(S)\subset W
+        \end{equation*}
+        \begin{equation*}
+            \therefore S\subset W\Rightarrow \mathcal{L}(S)\subset W. 
+        \end{equation*}
+        \qed{}
+    \end{enumerate}
+\end{prf}
+\begin{leftbar}
+    \begin{prop}張る部分空間と列基本変形\par
+        生成する部分空間の生成系\(S=\{a_{1},\dots,a_{n}\} \)に列基本変形を施しても
+        \(\mathcal{L}(S)\)は不変.
+        \begin{equation}
+            \begin{cases}
+                \mathcal{L}(a_{1},\dots,a_{k},\dots,a_{n})=\mathcal{L}(a_{1},\dots,\lambda a_{k},\dots,a_{n}),\lambda\in K/\{0_{K}\} \\
+                \mathcal{L}(a_{1},\dots,a_{k},\dots,a_{l},\dots,a_{n})=\mathcal{L}(a_{1},\dots,a_{k}+\lambda a_{l},\dots,a_{l},\dots,a_{n}),\lambda\in K\\
+                \mathcal{L}(a_{1},\dots,a_{k},\dots,a_{l},\dots,a_{n})=\mathcal{L}(a_{1},\dots,a_{l},\dots,a_{k},\dots,a_{n})
+            \end{cases}
+        \end{equation}
+    \end{prop}
+\end{leftbar}
+\section{和空間}
+\begin{leftbar}
+    \begin{defn}和空間[sum space]\par
+        \(W_{1},W_{2}\)を\(V\)の部分ベクトル空間として次のような集合
+        \begin{equation}
+            \{x_{1}+x_{2}|x_{1}\in W_{1},x_{2}\in W_{2}\}
+        \end{equation}
+        を\(W_{1},W_{2}\)の\textbf{和空間[sum space]}といい, \(W_{1}+W_{2}\)で表す.
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}生成する部分空間と和空間\par
+        \(W_{1},W_{2}\)を\(V\)の部分ベクトル空間とすると\(\mathcal{L}(W_{1}\cup{}W_{2})=W_{1}+W_{2} \)
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \(x\in\mathcal{L}(W_{1}\cup W_{2})\)とすると, 
+        \begin{equation*}
+            x=\sum_{i=1}^{n}\lambda_{i}a_{i},\lambda_{i}\in K,a_{i}\in W_{1}\cup W_{2}.
+        \end{equation*}
+        \begin{equation*}
+            a_{i}\in W_{1}\cup W_{2}\Leftrightarrow a_{i}\in W_{1}\vee a_{i}\in W_{2}
+        \end{equation*}
+        \begin{equation*}
+            \therefore x=\underset{W_{1}}{\underbrace{\sum_{i=1}^{k}\lambda_{p(i)}a_{p(i)}}}+\underset{W_{2}}{\underbrace{\sum_{i=1}^{l}\lambda_{q(i)}a_{q(i)}}}
+        \end{equation*}
+        となるから
+        \begin{equation*}
+            x\in W_{1}+W_{2}
+        \end{equation*}
+        \begin{equation*}
+            \therefore \mathcal{L}(S)\subset W_{1}+W_{2}
+        \end{equation*}
+        また, \(x\in W_{1}+W_{2}\)とすると, 
+        \begin{equation*}
+            x=x_{1}+x_{2},x_{1}\in W_{1},x_{2}\in W_{2}
+        \end{equation*}
+        \(x_{1},x_{2}\in W_{1}\cup W_{2}\)だから, 
+        \begin{equation*}
+            x=x_{1}+x_{2}\in \mathcal{L}(W_{1}\cup W_{2}).
+        \end{equation*}
+        從って
+        \begin{equation*}
+            W_{1}+W_{2}\subset \mathcal{L}(W_{1}\cup W_{2}).
+        \end{equation*}
+        以上より
+        \begin{equation*}
+            \mathcal{L}(W_{1}\cup W_{2})=W_{1}+W_{2}.
+        \end{equation*}
+        \qed{}
+\end{prf}
+\begin{leftbar}
+    \begin{prop}\(3\)つ以上の部分ベクトル空間の和空間\par
+        \(W_{1},W_{2},W_{3}\)をそれぞれ\(V\)の部分ベクトル空間とすると結合法則
+        \begin{equation}
+            (W_{1}+W_{2})+W_{3}=W_{1}+(W_{2}+W_{3})
+        \end{equation}以上より
+        が成り立つ. 
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \begin{equation*}
+        x\in (W_{1}+W_{2})+W_{3}
+    \end{equation*}
+    を仮定する. 定義より, 
+    \begin{equation*}
+        x=x_{12}+x_{3}\wedge x_{12}\in W_{1}+W_{2}\wedge x_{3}\in W_{3}
+    \end{equation*}
+    \begin{equation*}
+        x=x_{1}+x_{2}+x_{3}\wedge x_{1}\in W_{1}\wedge x_{2}\in W_{2}\wedge x_{3}\in W_{3}.
+    \end{equation*}
+    逆に
+    \begin{equation*}
+        x=x_{1}+x_{2}+x_{3}\wedge x_{1}\in W_{1}\wedge x_{2}\in W_{2}\wedge x_{3}\in W_{3}.
+    \end{equation*}
+    を仮定すると, \(x\in (W_{1}+W_{2})+W_{3}\).
+    從って
+    \begin{equation*}
+        x\in (W_{1}+W_{2})+W_{3}\Leftrightarrow x=x_{1}+x_{2}+x_{3}\wedge x_{1}\in W_{1}\wedge x_{2}\in W_{2}\wedge x_{3}\in W_{3}.
+    \end{equation*}
+    同様に
+    \begin{equation*}
+        x\in W_{1}+(W_{2}+W_{3})\Leftrightarrow x=x_{1}+x_{2}+x_{3}\wedge x_{1}\in W_{1}\wedge x_{2}\in W_{2}\wedge x_{3}\in W_{3}.
+    \end{equation*}
+    すなわち
+    \begin{equation*}
+        x\in (W_{1}+W_{2})+W_{3}\Leftrightarrow x\in W_{1}+(W_{2}+W_{3})
+    \end{equation*}
+    \begin{equation*}
+        \therefore (W_{1}+W_{2})+W_{3}= W_{1}+(W_{2}+W_{3})
+    \end{equation*}
+    \qed{}
+\end{prf}
+\begin{leftbar}
+    \begin{defn}\(3\)つ以上の部分ベクトル空間の和空間\par
+        \(W_{1},W_{2},W_{3}\)を\(V\)の部分ベクトル空間とすると
+        \begin{equation*}
+            (W_{1}+W_{2})+W_{3}=W_{1}+(W_{2}+W_{3})
+        \end{equation*}
+        が成り立つのでこれらをまとめて
+        \begin{equation}
+            W_{1}+W_{2}+W_{3}
+        \end{equation}
+        で表す. 同様に3つ以上の部分ベクトル空間の和集合を
+        \begin{equation}
+            W_{1}+W_{2}+\cdots+W_{n}
+        \end{equation}
+        で表す. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}\(3\)つ以上の部分ベクトル空間の和空間\par
+        \(W_{1},W_{2},\dots,W_{n}\)をそれぞれ\(V\)の部分ベクトル空間とすると,
+        \begin{equation}
+            W_{1}+W_{2}+\cdots+W_{n}=\left \{x\middle|x=\sum_{i=1}^{n}x_{i}\wedge x_{i}\in W_{i}\right \}
+        \end{equation}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    数学的帰納法による. \(n=2\)のときは和空間の定義から明らか. 
+    \(n=k\)のとき\(W_{1},\dots,W_{k}\)を\(V\)の部分ベクトル空間として
+    \begin{equation*}
+        W_{1}+W_{2}+\cdots+W_{k}=\left \{x\middle|x=\sum_{i=1}^{k}x_{i}\wedge x_{i}\in W_{i}\right \}
+    \end{equation*}
+    が成り立つと仮定すると, \(n=k+1\)のとき, \(W_{1},\dots,W_{k+1}\)を\(V\)の部分ベクトル空間として
+    \(x\in W_{1}+W_{2}+\cdots+W_{k+1}\)とすると
+    \begin{equation*}
+        x=x_{1}+x_{2}+\cdots+x_{k}+x_{k+1}.
+    \end{equation*}
+    從って
+    \begin{equation*}
+        x\in \left \{x\middle|x=\sum_{i=1}^{k+1}x_{i}\wedge x_{i}\in W_{i}\right \}
+    \end{equation*}
+    逆に, \(x\in \left \{x\middle|x=\sum_{i=1}^{k+1}x_{i}\wedge x_{i}\in W_{i}\right \} \)を仮定すると
+    \begin{equation*}
+        x\in (W_{1}+\cdots+W_{k})+W_{k+1}
+    \end{equation*}
+    だから, 
+    \begin{equation*}
+        x\in W_{1}+W_{2}+\cdots+W_{k+1}\Leftrightarrow x\in \left \{x\middle|x=\sum_{i=1}^{k+1}x_{i}\wedge x_{i}\in W_{i}\right \}
+    \end{equation*}
+    \begin{equation*}
+        \therefore W_{1}+W_{2}+\cdots+W_{k+1}=\left \{x\middle|x=\sum_{i=1}^{k+1}x_{i}\wedge x_{i}\in W_{i}\right \}
+    \end{equation*}
+    \qed{}
+\end{prf}
+\section{直積ベクトル空間}
+\begin{leftbar}
+    \begin{defn}直積ベクトル空間\par
+        体\(K\)上の部分ベクトル空間\(W_{1},W_{2}\)の直積集合
+        \begin{equation}
+            W_{1}\times{}W_{2}=\{\langle x_{1},x_{2}\rangle|x_{1}\in W_{1}\wedge x_{2}\in W_{2}\}
+        \end{equation}
+        これに和とスカラー倍を以下のように定義したものを直積ベクトル空間という. 
+        \begin{equation}
+            \langle x_{1},x_{2}\rangle+\langle y_{1},y_{2}\rangle=\langle x_{1}+y_{1},x_{2}+y_{2}\rangle
+        \end{equation}
+        \begin{equation}
+            \lambda\langle x_{1},x_{2}\rangle=\langle\lambda{}x_{1},\lambda{}x_{2}\rangle
+        \end{equation}
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{cor}
+        直積ベクトル空間はベクトル空間
+    \end{cor}
+\end{leftbar}
+\section{直和}
+\begin{leftbar}
+    \begin{defn}直和[direct sum] \par
+        ベクトル空間\(V\)の部分ベクトル空間\(W_{1},\ldots,W_{n}\)に対して\(V\)の任意の元\(x\)が
+        \begin{equation}
+            x=x_{1}+\cdots+x_{n}(x_{1}\in W_{1},\ldots,x_{n}\in W_{n})
+        \end{equation}
+        と一意的に表されるとき\(V\)を\(W_{1},\ldots,W_{n}\)の\textbf{直和[direct sum]}といい, 
+        \begin{equation}
+            V=W_{1}\oplus\cdots\oplus W_{n}
+        \end{equation}
+        または
+        \begin{equation}
+            V=\bigoplus_{i=1}^{n}W_{i}
+        \end{equation}
+        で表す.
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}\(V\)が\(W_{1},W_{2}\)の直和であることの必要十分条件
+        \begin{equation}
+            V=W_{1}\oplus{}W_{2}\Leftrightarrow
+            \begin{cases}
+                V=W_{1}+W_{2}\\
+                W_{1}\cap{}W_{2}=\{0_{V}\}
+            \end{cases}
+        \end{equation}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \((\Rightarrow)\) \(V\)をベクトル空間, 
+    \(W_{1},W_{2}\)をその部分ベクトル空間として
+    \(V=W_{1}\oplus W_{2}\)を仮定する.
+    \(x\in V\)とすると, 
+    \begin{equation*}
+        x=x_{1}+x_{2},x_{1}\in W_{1},x_{2}\in W_{2}
+    \end{equation*}
+    と一意的に表されるので, 
+    \begin{equation*}
+        x\in W_{1}+W_{2}
+    \end{equation*}
+    \begin{equation*}
+        \therefore x\in V\Rightarrow x\in W_{1}+W_{2}
+    \end{equation*}
+    また, \(V\)はベクトル空間だから
+    \begin{equation*}
+        x\in W_{1}+W_{2}\Rightarrow x\in V
+    \end{equation*}
+    從って
+    \begin{equation*}
+        V=W_{1}+W_{2}
+    \end{equation*}
+    また, \(x\in W_{1}\wedge x\in W_{2}\)を仮定すると,
+    \begin{equation*}
+        x=x_{1}+0_{V}=0_{V}+x_{2},x_{1}\in W_{1},x_{2}\in W_{2}
+    \end{equation*}
+    と書ける. 直和の定義から\(x\)の\(x=x_{1}+x_{2}\)の形の表示の仕方は
+    一意なので\(x_{1}=0_{V},x_{2}=0_{V}\). 從って
+    \begin{equation*}
+        x\in W_{1}\cap W_{2}\Rightarrow x=0_{V}
+    \end{equation*}
+    \begin{equation*}
+        \therefore W_{1}\cap W_{2}=\{0_{V}\}.
+    \end{equation*}
+    よって\(\Rightarrow{}\)は示せた. \\
+    \((\Leftarrow)\)
+    \begin{equation*}
+        \begin{cases}
+            V=W_{1}+W_{2}\\
+            W_{1}\cap W_{2}=\{0_{V}\}
+        \end{cases}
+    \end{equation*}
+    を仮定する. \(x\in V\)とすると, 仮定より
+    \begin{equation*}
+        x=x_{1}+x_{2},x_{1}\in W_{1},x_{2}\in W_{2}
+    \end{equation*}
+    と書ける. 
+    \begin{equation*}
+        x=x'_{1}+x'_{2},x'_{1}\in W_{1},x'_{2}\in W_{2}
+    \end{equation*}
+    とすると
+    \begin{equation*}
+        0_{V}=(x_{1}-x'_{1})+(x_{2}-x'_{2})
+    \end{equation*}
+    \begin{equation*}
+        x_{1}-x'_{1}=x'_{2}-x_{2}
+    \end{equation*}
+    \(x_{1}-x'_{1}\in W_{1}\wedge x'_{2}-x_{2}\in W_{2}\)だから
+    \begin{equation*}
+        x_{1}-x'_{1}=x'_{2}-x_{2}\in W_{1}\cap W_{2}.
+    \end{equation*}
+    仮定より
+    \begin{equation*}
+        x_{1}-x'_{1}=x'_{2}-x_{2}=0_{V}.
+    \end{equation*}
+    從って
+    \begin{equation*}
+        x_{1}=x'_{1},x'_{2}=x_{2}
+    \end{equation*}
+    だから任意の\(x\in V\)は\(x=x_{1}+x_{2},x_{1}\in W_{1},x_{2}\in W_{2}\)と一意的に表されるので
+    \begin{equation*}
+        V=W_{1}\oplus W_{2}.
+    \end{equation*}
+    よって\(\Leftarrow \)も示せた. 
+    \qed{}
+\end{prf}
+\begin{leftbar}
+    \begin{prop}直和の結合法則\par
+        \(W_{1},W_{2},W_{3}\)を\(V\)の部分ベクトル空間として
+        \begin{equation}
+            (W_{1}\oplus W_{2})\oplus W_{3}=W_{1}\oplus(W_{2}\oplus W_{3})
+        \end{equation}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \(x\in (W_{1}\oplus W_{2})\oplus W_{3}\)とする. 直和の定義から
+    \begin{equation*}
+        x=x_{12}+x_{3},x_{12}\in W_{1}\oplus W_{2},x_{3}\in W_{3}
+    \end{equation*}
+    と一意的に表せる. \(x_{12}\)も\(x_{12}=x_{1}+x_{2},x_{1}\in W_{1},x_{2}\in W_{2}\)と
+    一意的に表せるので結局\(x\)は
+    \begin{equation*}
+        x=x_{1}+x_{2}+x_{3},x_{1}\in W_{1},x_{2}\in W_{2},x_{3}\in W_{3}
+    \end{equation*}
+    と一意的に表される. 
+\end{prf}
+\begin{leftbar}
+    \begin{prop}\(V\)が\(W_{1},\ldots W_{n}\)の直和であることの必要十分条件
+        \begin{equation}
+            V=\bigoplus_{i=1}^{n}W_{i}\Leftrightarrow
+            \begin{cases}
+                V=W_{1}+\cdots+W_{n}\\
+                \forall i=1,\dots,n;(W_{1}+\cdots+W_{i-1}+W_{i+1}+\cdots+W_{n})\cap W_{i}=\{0\}
+            \end{cases}
+        \end{equation}
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    
+\end{prf}
+\part{線形写像}
+\section{線形写像}
+\begin{leftbar}
+    \begin{defn}線形写像\par
+        体\(K\)上のベクトル空間\(V,W\)についての写像\(f:V\to W\)
+        が次の性質を同時に満たすとき, \(f\)は線形写像である.
+        \begin{enumerate}
+            \item \(f(x+y)=f(x)+f(y)(x,y\in V)\)
+            \item \(f(\lambda x)=\lambda f(x)(\lambda\in K,x\in V)\)
+        \end{enumerate}
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}
+        線形写像\(f:V\to W\)について次が成り立つ. 
+        \begin{empheq}[left=\empheqlbrace]{align*}
+            f(0_{V})&=0_{W}\\
+            f\left(\sum_{i}^{n}\lambda_{i}x_{i}\right)&=\sum_{i}^{n}\lambda_{i}f(x_{i})
+        \end{empheq}
+    \end{prop}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}次が成り立つ
+        \begin{enumerate}
+            \item 恒等写像\(1_{V}:V\to V\)は線形写像. 
+            \item \(f:V_{1}\to V_{2}, g:V_{2}\to V_{3}\)が線形写像ならば, 合成写像
+            \(g\circ f:V_{1}\to V_{3}\)も線形写像. 
+        \end{enumerate}
+    \end{prop}
+\end{leftbar}
+\section{像と核}
+\begin{leftbar}
+    \begin{prop}線形写像\(f:V\to W\)について次が成立する. 
+        \begin{enumerate}
+            \item \(V'\)を\(V\)の部分ベクトル空間とすると, \(f(V')\)は部分ベクトル空間
+            \item \(W'\)を\(W\)の部分ベクトル空間とすると, \(f^{-1}(W')\)は部分ベクトル空間. 
+        \end{enumerate}
+    \end{prop}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}像と核\par
+        線形写像\(f:V\to W\)について
+        \begin{enumerate}
+            \item 
+            \(f\)の値域
+            \begin{equation}
+                \mathrm{Im}f:=\{f(x)|x\in V\}
+            \end{equation}
+            を\(f\)の\textbf{像空間[image]}という. 
+            \item 
+            \(f\)の解空間
+            \begin{equation}
+                \mathrm{Ker}f:=\{x|f(x)=0\}
+            \end{equation}
+            を\(f\)の\textbf{核[kernel]}という. 
+        \end{enumerate}
+    \end{defn}
+\end{leftbar}
+\section{同型写像}
+\begin{leftbar}
+    \begin{defn}同型写像
+        線形写像\(f:V\to W\)に対して,
+        \begin{empheq}[left=\empheqlbrace]{align}
+            f\circ{}g&=1_{V}:V\to{}V\\
+            g\circ{}f&=1_{W}:W\to{}W
+        \end{empheq}
+        を満たす線形写像\(g:W\to V\)が存在するとき, \(f\)を同型写像といい, 
+        \begin{equation}
+            f:V \approx W
+        \end{equation} 
+        と表す. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}
+        線形写像\(f:V\to W\)について次は同値
+        \begin{enumerate}
+            \item \(f\)は同型写像. 
+            \item \(f\)は全単射でその逆写像\(f^{-1}\)も全単射. 
+            \item \(f\)は全単射. 
+        \end{enumerate}
+    \end{prop}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}
+        \begin{enumerate}
+            \item 線形写像\(f:V\to W\)が単射であることの必要十分条件は\(\mathrm{Ker}f=\{0\} \)となることである. 
+            \item 線形写像\(f:V\to W\)が同型写像となることの必要十分条件は\(\mathrm{Ker}f=\{0\}\wedge\mathrm{Im}f=W\)となることである.
+        \end{enumerate}
+    \end{prop}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}
+        \begin{enumerate}
+            \item \(1_{V}:V\to V\)は同型写像. 
+            \item \(f:V\to W\)が同型写像なら, その逆写像\(f^{-1}:W\to V\)も同型写像. 
+        \end{enumerate}
+    \end{prop}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}同型なベクトル空間\par
+        2つのベクトル空間\(V,W\)に対して同型写像\(f:V\approx W\)が存在するとき, \(V\)と\(W\)は
+        同型であるといい, この関係を
+        \begin{equation}
+            V\approx W
+        \end{equation}
+        と表す. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}同型関係は同値関係.
+    \end{prop}
+\end{leftbar}
+\section{商ベクトル空間}
+\begin{leftbar}
+    \begin{defn}
+        \(W\)を\(V\)の部分ベクトル空間とする. \(x,y\in V\)に対して, 
+        \begin{equation}
+            y-x\in W
+        \end{equation}
+        が成り立つとき, 
+        \begin{equation}
+            x\equiv y\mod{W}
+        \end{equation}
+        と定義する.
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{lem}
+        \begin{equation}
+            x\equiv y\mod{W}
+        \end{equation}
+        という関係は\(V\)の同値関係である. 
+    \end{lem}
+\end{leftbar}
+\begin{leftbar}
+    \begin{lem}
+        \begin{enumerate}
+            \item 
+            \begin{equation}
+                x\equiv x'\mod{W}\wedge y\equiv y'\mod{W}\Rightarrow x+y\equiv x'+y'\mod{W} 
+            \end{equation}
+            \item 
+            \begin{equation}
+                \lambda\in K\wedge x\equiv x'\mod{W}\Rightarrow \lambda x\equiv\lambda x'\mod{W}
+            \end{equation}
+        \end{enumerate}
+    \end{lem}
+\end{leftbar}
+\section{準同型定理}
+\part{基底と次元}
+\begin{leftbar}
+    \begin{defn}線形関係\par
+        \(a_{1},\ldots,a_{n}\in V\)に対して, 
+        \begin{equation}
+            c_{1}a_{1}+\cdots+c_{n}a_{n}=0
+        \end{equation}
+        を線形関係という. 
+        \begin{equation}
+            c_{1}=\cdots=c_{n}=0
+        \end{equation}
+        のときを自明な線形関係という. それ以外のとき, つまり
+        \begin{equation}
+            \exists i,c_{i}\neq 0
+        \end{equation}
+        のときを非自明な線形関係という. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}線形独立・線形従属\par
+        ベクトルの組\(a_{1},\ldots,a_{n}\)の線形関係
+        \begin{equation}
+            c_{1}a_{1}+\cdots+c_{n}a_{n}=0
+        \end{equation}
+        に関して, 非自明な線形関係が存在しないとき, \(a_{1},\ldots,a_{n}\)
+        は線形独立であるといい, 非自明な線形関係が存在するとき, \(a_{1},\ldots,a_{n}\)
+        は線形従属であるという. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}有限次元と無限次元\par
+        ベクトル空間\(V\)の\(n\)個の元の組\(a_{1},\ldots,a_{n}\)で線形独立なものが存在し, 
+        任意の\(n+1\)個の元の組が線形従属のとき, \(V\)は有限次元ベクトル空間で
+        その次元は\(n\)であるといい, 
+        \begin{equation}
+            \dim{V}=n
+        \end{equation}
+        と書く. また任意の自然数\(n\)に対し線形独立な組\(a_{1},\ldots,a_{n}\)が存在するとき, 
+        \(V\)は無限次元ベクトル空間で, このことを
+        \begin{equation}
+            \dim{V}=\infty
+        \end{equation}
+        で表す. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}基底\par
+        \(\mathcal{B}={b_{1},\dots,b_{n}}\)に対し, \(V=\mathcal{L}(\mathcal{B})\)かつ\(b_{1},\dots,b_{n}\)が線形独立
+        のとき\(\mathcal{B}\)を\(V\)の基底という.
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}\(\mathcal{B}=\{b_{1},\dots,b_{n}\} \)が\(V\)の基底になることの必要十分条件\par
+        \(\mathcal{B}=\{b_{1},\dots,b_{n}\} \)が\(V\)の基底となるための必要十分条件は\(V\)の任意の元が
+        \begin{equation}
+            x=\sum_{i=1}^{n}\lambda_{i}b_{i},\lambda_{i}\in K
+        \end{equation}
+        の形に一意的に表されることである. すなわち
+        \begin{empheq}[left=\empheqlbrace]{align}
+            x\in{}V\Rightarrow\exists\lambda_{1},\dots,\lambda_{n}\in{}K,x=\sum_{i=1}^{n}\lambda_{i}b_{i}\\
+            \sum_{i=1}^{n}\lambda_{i}b_{i}=\sum_{i=1}^{n}\lambda'_{i}b_{i}\Rightarrow\lambda_{i}=\lambda'_{i}
+        \end{empheq}
+    \end{prop}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}座標\par
+        \(\mathcal{B}=\{b_{1},\dots,b_{n}\} \)が\(V\)の基底であるとき, \(V\)の元\(x\)は線型結合
+        \begin{equation}
+            x=\sum_{i=1}^{n}\lambda_{i}b_{i},\lambda_{i}\in K
+        \end{equation}
+        で一意的に表せる. この係数の組\(^{t}[\lambda_{1},\dots,\lambda_{n}]\in K^{n}\)を\(x\)の\(\mathcal{B}\)に
+        関する\textbf{座標[coordinates]}という. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{cor}
+        \(V\)の元を基底\(\mathcal{B}\)に関する座標に対応させる写像
+        \begin{equation}
+            \phi:x\mapsto^{t}[\lambda_{1},\dots,\lambda_{n}]
+        \end{equation}
+        は同型写像である. 
+    \end{cor}
+\end{leftbar}
+\section{基底と次元に関する諸性質}
+\section{部分ベクトル空間と次元・補空間}
+\section{線形写像と次元}
+\section{線形写像の行列表示}
+\begin{leftbar}
+    \begin{defn}行列\par
+        \(T_{n}=\{1,\dots,n\} \)として写像\(a:T_{n}\times T_{m}\to K\)を縦と横に
+        並べたもの
+        \begin{equation}
+            A=
+            \begin{bmatrix}
+                a_{11} & \cdots & a_{1m} \\ 
+                \vdots & \ddots & \vdots \\ 
+                a_{n1} & \cdots & a_{nm}
+            \end{bmatrix}
+        \end{equation}
+        を\textbf{行列[matrix]}といい, \(a_{ij}\)をその行列の\textbf{要素[element]}
+        という. 
+    \end{defn}
+\end{leftbar}
+\(V,W\)を有限次元ベクトル空間とする. \(\mathcal{A}=\{a_{1},\dots,a_{n}\},
+\mathcal{B}=\{b_{1},\dots,b_{m}\} \)をそれぞれ\(V,W\)の基底とし, \(f:V\to{}W\)
+を線形写像とする. \(V\)の任意の元\(x\)は
+\begin{equation}
+    x=\sum_{i=1}^{n}\lambda^{i}a_{i},\mu_{i}\in K
+\end{equation}
+で表される. また, \(f(a_{j})\in W\)は
+\begin{equation}
+    f(a_{j})=\sum_{i=1}^{m}a_{iaj}b_{i},a_{ij}\in K
+\end{equation}
+で表される. 從って\(f\)の線形性から
+\begin{equation}
+    f(x)=\sum_{j=1}^{n}\lambda^{j}f(a_{j})=\sum_{j=1}^{n}\sum_{i=1}^{m}a_{j}^{i}\lambda^{j}b_{i}
+\end{equation}
+が成り立つ. \(f(x)\in W\)なので
+\begin{equation}
+    f(x)=\sum_{i=1}^{m}\mu_{i}b_{i}
+\end{equation}
+と表されるので, \(f(x)\)の\(\mathcal{B}\)における座標は
+\begin{equation}
+    \mu_{i}=\sum_{j=1}^{n}a_{j}^{i}\lambda^{j}
+\end{equation}
+となる. 
+この\(a^{i}_{j}\)を縦と横に並べたもの
+\begin{equation}
+    A:=
+    \begin{bmatrix}
+    a_{11} & \cdots & a_{1m} \\ 
+    \vdots & \ddots & \vdots \\ 
+    a_{n1} & \cdots & a_{nm}
+    \end{bmatrix}
+\end{equation}
+を\(f\)の表現行列という.
+\begin{leftbar}
+    \begin{defn}行列の積\par
+        有限次元ベクトル空間から
+    \end{defn}
+\end{leftbar}
+\section{有限次元ベクトル空間}
+\part{計量ベクトル空間}
+\begin{leftbar}
+    \begin{defn}内積空間\par
+        体\(K(=\mathbb{C},\mathbb{R})\)上の線形空間\(\mathcal{H}\)に次の性質を満たす
+        二項演算\({(,)}_{\mathcal{H}}:\mathcal{H}^{2}\to K\), 
+        すなわち\textbf{内積[inner product]}が定義されているとき, 
+        これを体\(K\)上の\textbf{内積空間[inner product space]}
+        または\textbf{前ヒルベルト空間[pre-Hilbert space]}という. \\
+        正値性
+        \begin{equation}
+           \psi\in\mathcal{H}\Rightarrow {(\psi,\psi)}_{\mathcal{H}}>0
+        \end{equation}
+        正定値性
+        \begin{equation}
+            \psi\in\mathcal{H}\wedge{(\psi,\psi)}_{\mathcal{H}}=0\Rightarrow\psi=0
+        \end{equation}
+        線形性
+        \begin{equation}
+            \psi,\phi_{1},\phi_{2}\in\mathcal{H}\wedge\alpha,\beta\in K\Rightarrow(\psi,\alpha\phi_{1}+\beta\phi_{2}){}_{\mathcal{H}}
+            =\alpha(\psi,\phi_{1})+\beta(\psi,\phi_{2})
+        \end{equation}
+        対称性
+        \begin{equation}
+            \psi,\phi\in\mathcal{H}\Rightarrow{(\psi,\phi)}_{\mathcal{H}}={(\phi,\psi)}_{\mathcal{H}}^{*}
+        \end{equation}
+    \end{defn}
+\end{leftbar}
+\section{ノルムと各不等式}
+\begin{leftbar}
+    \begin{defn}ノルム[norm]\par
+            体\(K\)上の内積空間\(\mathcal{H}\)の元\(\psi\in\mathcal{H}\)に対して
+        \begin{equation}
+            \|\psi{}\|:=\sqrt{(\psi,\psi)}
+        \end{equation}
+        をノルムという. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}シュワルツの不等式\par
+        内積空間の2元\(\psi,\phi\in\mathcal{H}\)に関し,
+        \begin{equation}
+            \|\psi{}\|{}\|\phi{}\|{}\|\geq|(\psi,\phi)|
+        \end{equation}
+        が成り立つ. 
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \(\psi,\phi\in\mathcal{H}\wedge t\in \mathbb{R}\)として
+    \begin{equation*}
+        \|\psi+t\phi{}\|^{2}\geq 0
+    \end{equation*}
+    \begin{equation*}
+        (\psi+t\phi,\psi+t\phi)=\|\psi{}\|^{2}+2t\mathrm{Re}((\psi,\phi))+t^{2}\|\phi{}\|^{2}\geq 0
+    \end{equation*}
+    この等式が任意の\(t\)で成り立つための必要十分条件は, 
+    右辺の\(t\)に関する二次関数の判別式を\(D\)として
+    \begin{equation*}
+        \frac{D}{4}={\left \{\frac{(\psi,\phi)+(\phi,\psi)}{2}\right \}}^{2}-\|\psi{}\|^{2}\|\phi{}\|^{2}\leq 0
+    \end{equation*}
+    \begin{equation*}
+        \therefore{}\|\psi{}\|{}\|\phi{}\|\geq|(\psi,\phi)|.
+    \end{equation*}
+    \qed{}
+\end{prf}
+\begin{leftbar}
+    \begin{prop}三角不等式\par
+        体\(K\)上の内積空間\(\mathcal{H}\)の
+        ２つのベクトル\(\psi,\phi\in\mathcal{H}\)に関して次が成り立つ. 
+        \begin{equation}
+            \|\psi+\phi{}\|\leq{}\|\psi{}\|+\|\phi{}\|
+        \end{equation}
+        これは三角不等式と呼ばれる. 
+    \end{prop}
+\end{leftbar}
+\begin{prf}
+    \(\psi,\phi\in\mathcal{H}\)について, 
+    \begin{align*}
+        {(\|\psi{}\|+\|\phi{}\|)}^{2}-\|\psi+\phi{}\|^{2}\\
+        =\|\psi{}\|^{2}+2\|\psi{}\|{}\|\phi{}\|+\|\phi{}\|^{2}-\|\psi{}\|^{2}-2\mathrm{Re}((\psi,\phi))-\|\phi{}\|^{2}\\
+        =2(\|\psi{}\|{}\|\phi{}\|-\mathrm{Re}((\psi,\phi))).
+    \end{align*}
+    と書ける. 
+    \begin{equation*}
+        \mathrm{Re}((\psi,\phi))\leq|(\psi,\phi)|\leq{}\|\psi{}\|{}\|\phi{}\|
+    \end{equation*}
+    だから,
+    \begin{equation*}
+        {(\|\psi{}\|+\|\phi{}\|)}^{2}-\|\psi+\phi{}\|^{2}\geq0
+    \end{equation*}
+    \begin{equation*}
+        \therefore \|\psi+\phi{}\|\leq{}\|\psi{}\|+\|\phi{}\|.
+    \end{equation*}
+    \qed{}
+\end{prf}
+\section{距離}
+\begin{leftbar}
+    \begin{defn}距離関数\par
+        ベクトル\(\psi,\phi\in\mathcal{H}\)の距離を
+        \begin{equation}
+            d(\psi,\phi):=\|\psi-\phi{}\|
+        \end{equation}
+        で定義する.
+    \end{defn}
+\end{leftbar}
+\section{完備性とヒルベルト空間}
+\begin{leftbar}
+    \begin{defn}点列と極限\par
+        自然数の集合\(\mathbb{N}\)から内積空間\(\mathcal{H}\)への
+        写像\(\psi:n\mapsto\psi_{n}\)を\textbf{点列}といい,
+        \begin{equation}
+            {\{\psi{}\}}_{n=1}^{\infty}
+        \end{equation}
+        で表す. 
+        \begin{equation}
+            \lim_{n\to\infty}(\psi_{n},\psi)=0
+        \end{equation}
+        を満たすとき, \(\psi_{n}\)は\(\psi{}\)に収束するといい, 
+        \begin{equation}
+            \psi_{n}\rightarrow\psi
+        \end{equation}
+        と書く. この\(\psi{}\)を点列の極限[limit]という. 
+        収束する点列を\textbf{収束列[convergent sequence]}という. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}コーシー列[Cauchy sequence]\par
+        \(\mathcal{H}\)の点列\({\{\psi_{n}\}}_{n=1}^{\infty}\)のうち, 
+        \begin{equation}
+            \forall\varepsilon>0,\exists N\in\mathbb{N},n,m>N\Rightarrow d(\psi_{n},\psi_{m})<\varepsilon
+        \end{equation}
+        を満たすような点列をコーシー列あるいは基本列[fundamental sequence]という. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}ヒルベルト空間[Hilbert space]\par
+        内積空間\(\mathcal{H}\)の任意のコーシー列が収束するとき, 
+        \(\mathcal{H}\)はヒルベルト空間という.
+    \end{defn}
+\end{leftbar}
+\section{正規直交系}
+\begin{leftbar}
+    \begin{defn}クロネッカーのデルタ[Kronecker delta]\par
+        次式で定義される写像\(\delta_{ij}:{\mathbb{N}}^{2}\to{}\{0,1\} \)を
+        \textbf{クロネッカーのデルタ[Kronecker delta]}という. 
+        \begin{equation}
+            \delta_{ij}=
+            \begin{cases}
+                1&(i=j)\\
+                0&(i\neq j)
+            \end{cases}
+        \end{equation}
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}正規直交系[orthonormal system]\par
+        内積空間\(\mathcal{H}\)のベクトルの集合\(\mathcal{B}=\{b_{1},\dots,b_{n}\} \)
+        において,
+        \begin{equation}
+            \langle b_{i},b_{j}\rangle=\delta_{ij}
+        \end{equation}
+        が成り立つとき\(\mathcal{B}\)を\textbf{正規直交系[orthonormal system]}という. 
+        ここで\(\delta_{ij}\)はクロネッカーのデルタである. 
+    \end{defn}
+\end{leftbar}
+\section{グラム・シュミットの直交化法}
+\begin{leftbar}
+    \begin{thm}グラム・シュミットの直交化法[Gram-Schmidt orthonormalization]\par
+        線形独立な系\(\mathcal{B}=\{b_{1},\dots,b_{n}\} \)が内積空間\(\mathcal{H}\)
+        の基底のとき, 
+        \begin{equation}
+            u_{i}:=b_{i}-\frac{\langle b_{j},u_{1}\rangle}{\langle u_{i},u_{1}\rangle}b_{1}-\cdots-\frac{\langle b_{j},u_{i-1}\rangle}{\langle u_{i},u_{i-1}\rangle}b_{i-1}
+        \end{equation}
+        とすれば,
+        \begin{equation}
+            u_{i}\neq0_{\mathcal{H}},\langle u_{i},u_{j}\rangle=\|u_{i}\|^{2}\delta_{ij}
+        \end{equation}
+        が成り立ち, \(\mathcal{U}=\{u_{1},\dots,u_{n}\} \)に対し
+        \begin{equation}
+            \mathcal{L}(\mathcal{B})=\mathcal{L}(\mathcal{U})
+        \end{equation}
+        が成り立つ. すなわち\(\mathcal{U}\)もまた\(V\)の基底である. 
+        また\(\mathcal{U}\)を
+        \begin{equation}
+            e_{i}:=\frac{u_{i}}{\|u_{i}\|}
+        \end{equation}
+        直交化すれば, 正規直交基底
+        \(\mathcal{E}=\{e_{1}.\dots,e_{n}\} \)
+        が得られる. 
+    \end{thm}
+\end{leftbar}
+\begin{prf}
+    
+\end{prf}
+\section{直交行列}
+\begin{leftbar}
+    \begin{defn}直交行列\par
+        次の等式を満たすような行列\(T\)を直交行列という. 
+        \begin{equation}
+            T{}^{t}T={}^{t}TT=I
+        \end{equation}
+    \end{defn}
+\end{leftbar}
+\part{行列式}
+\section{置換}
+\begin{leftbar}
+    \begin{defn}置換[permutation]\par
+        \(X=\{1,\dots,n\} \)から\(X\)への全単射
+        \begin{equation}
+            \sigma:X\to X
+        \end{equation}
+        をn次の\textbf{置換[permutation]}といい, 
+        \begin{equation}
+            \sigma=
+            \begin{pmatrix}
+                1 & \cdots & n\\ 
+                \sigma(1) & \cdots & \sigma(n)
+            \end{pmatrix}
+        \end{equation}
+        と書く. 
+    \end{defn}
+\end{leftbar}
+\section{行列式}
+\begin{leftbar}
+    \begin{defn}行列式\par
+        
+    \end{defn}
+\end{leftbar}
+\part{固有値・固有ベクトル・対角化}
+\begin{leftbar}
+    \begin{defn}固有値・固有ベクトル
+        \(A\)を行列, \(x\)をベクトルとして
+        \begin{equation}
+            Ax=\lambda x,\lambda\in K
+        \end{equation}
+        となるとき, \(\lambda{}\)を\textbf{固有値[eigenvalue]}, 
+        \(x\)を\textbf{固有ベクトル[eigenvector]}という. 
+    \end{defn}
+\end{leftbar}
+\part{エルミート行列・ユニタリー行列}
+\begin{leftbar}
+    \begin{defn}複素転置行列\par
+        複素行列\(A \)に対しその複素転置行列を
+        \begin{equation}
+            A^{\dagger}:=\bar{A}^{*}
+        \end{equation}
+        で表す. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}エルミート行列\par
+        正方行列\(A\)が
+        \begin{equation}
+            A=A^{\dagger}
+        \end{equation}
+        を満たすとき\(A\)を\textbf{エルミート行列[Hermitian matrix]}という. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}エルミート行列の固有値は実数. \par
+        \begin{equation}
+            Ax=\lambda x\Rightarrow \lambda\in\mathbb{R}
+        \end{equation}
+    \end{prop}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}ユニタリー行列\par
+        正方行列\(U\)が
+        \begin{equation}
+            U{}^{\dagger}U={}^{\dagger}UU=I
+        \end{equation}
+        を満たすとき\(U\)を\textbf{ユニタリー行列[unitary matrix]}という. 
+    \end{defn}
+\end{leftbar}
+\part{線形常微分方程式}
+\begin{leftbar}
+    \begin{defn}斉次微分方程式\par
+        \begin{equation}
+            \frac{d^{n}f}{dx^{n}}+\cdots+\frac{df}{dx}=0
+        \end{equation}
+        の形の微分方程式を斉次微分方程式という. 
+    \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{defn}非斉次微分方程式\par
+        \begin{equation}
+            \frac{d^{n}f}{dx^{n}}+\cdots+\frac{df}{dx}=b(x)
+        \end{equation}
+        の形の微分方程式を非斉次微分方程式という. 
+    \end{defn}
+\end{leftbar}
+\begin{thebibliography}{9}
+    \bibitem{linear-algebla}白岩謙一. 基礎課程 線形代数入門. 初版, サイエンス社, 1976, 244p.
+    \bibitem{linear-algebla2}斎藤正彦. 基礎数学1 線形代数入門. 初版, 東京大学出版会, 1966, 274p.
+    \bibitem{Hilbert}新井朝雄. ヒルベルト空間と量子力学. 改訂増補版, 共立出版株式会社, 2014, 338p.
+    \bibitem{text}慶應義塾大学数理科学科. 数学2・数学4. 第2版, 学術図書出版社, 2016, 264p.
+\end{thebibliography}
+\end{document}
