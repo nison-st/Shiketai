@@ -249,22 +249,48 @@
         \end{defn}
     \end{leftbar}
 
-    \section{線績分・面積分と積分定理}
+    \part{線績分・面積分}
     \begin{leftbar}
         \begin{defn}曲線\par
-            
+            \begin{equation*}
+                \Gamma:=\{\bm(x)(t)\mid a\leq t\leq b\}
+            \end{equation*}
+            を曲線という. 
         \end{defn}
     \end{leftbar}
     \begin{leftbar}
         \begin{defn}線績分\par
-            
+            \begin{equation}
+                \int_{\Gamma}fds:=\int f(\bm{x}(s))\sqrt{{\left(\frac{dx_{1}(s)}{ds}\right)}^{2}+{\left(\frac{dx_{2}(s)}{ds}\right)}^{2}+{\left(\frac{dx_{3}(s)}{ds}\right)}^{2}}ds
+            \end{equation}
+            を線績分という. 
+        \end{defn}
+    \end{leftbar}
+    \begin{leftbar}
+        \begin{defn}ベクトル場の線積分\par
+            ベクトル場の線積分は
+            \begin{equation}
+                \int_{\Gamma}\bm{f}\cdot d\bm{S}=\int_{\Gamma}\bm{f}\cdot\bm{n}dS=\int \bm{f}\cdot\bm{n}\sqrt{{\left(\frac{dx_{1}(s)}{ds}\right)}^{2}+{\left(\frac{dx_{2}(s)}{ds}\right)}^{2}+{\left(\frac{dx_{3}(s)}{ds}\right)}^{2}}ds
+            \end{equation}
         \end{defn}
     \end{leftbar}
     \begin{leftbar}
         \begin{defn}面積分\par
-            
+            \(z=\varphi(x,y)\)で表される曲面における\(f\)の面積分は
+            \begin{equation}
+                \iint_{\mathcal{D}}fdS=\iint_{\mathcal{D}}f\sqrt{1+\varphi_{x}^{2}+\varphi_{y}^{2}}dxdy
+            \end{equation}
         \end{defn}
     \end{leftbar}
+    \begin{leftbar}
+        \begin{defn}ベクトル場の面積分\par
+            \(z=\varphi(x,y)\)で表される曲面における\(\bm{f}\)の面積分は
+            \begin{equation}
+                \iint_{\mathcal{D}}\bm{f}d\bm{S}=\iint_{\mathcal{D}}\bm{f}\cdot\bm{n}\sqrt{1+\varphi_{x}^{2}+\varphi_{y}^{2}}dxdy
+            \end{equation}
+        \end{defn}
+    \end{leftbar}
+    \part{積分定理}
     \section{グリーン[Green]の定理}
     \begin{equation}
         \oint_{\Gamma}f_{1}dx_{1}+f_{2}dx_{2}=\iint_{D}\left(-\frac{\partial f_{1}}{\partial x_{1}}+\frac{\partial f_{2}}{\partial x_{2}}\right )
