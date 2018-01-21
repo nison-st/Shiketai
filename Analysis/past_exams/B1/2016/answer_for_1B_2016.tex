@@ -7,9 +7,6 @@
         \thesection.\arabic{equation}}
         \@addtoreset{equation}{section}
     
-        \renewcommand{\thefigure}{% 図番号の付け方
-        \thesection.\arabic{figure}}
-        \@addtoreset{figure}{section}
         \renewcommand{\thetable}{% 表番号の付け方
         \thesection.\arabic{table}}
         \@addtoreset{table}{section}
@@ -33,9 +30,6 @@
 %
     \let\normalref\ref
 \renewcommand{\ref}{\cref}
-    \newcommand{\Tabref}[1]{表\ref{#1}}
-    \newcommand{\Equref}[1]{式 (\ref{#1})}
-    \newcommand{\Figref}[1]{図\ref{#1}}
     %
     %
     \title{Answer for 1B 2016}
@@ -102,11 +96,16 @@
             \mathcal{D}:=\{(x,y)\mid0\leq y\leq 1,y^{3}\leq x\leq 2-y^{2}\}
         \end{equation*}
         これをグラフに書くと
+        \begin{figure}[tbh]
+            \centering
+            \includegraphics[height=7cm]{newplot.png}
+            \caption{\(y_{1}:y=\sqrt[3]{x},y_{2}:y=\sqrt{2-x}\)のグラフ. }
+        \end{figure}
         \begin{equation*}
             \mathcal{D}'=\left \{(x,y)\middle|0\leq x\leq 2,
             \begin{cases}
                 0\leq y\leq \sqrt[3]{x}&(0\leq x\leq 1) \\
-                0\leq y\leq \leq \sqrt{2-x}&(1\leq x\leq 2)
+                0\leq y\leq \sqrt{2-x}&(1\leq x\leq 2)
             \end{cases}
             \right \}
         \end{equation*}
@@ -198,7 +197,13 @@
                 S=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}rdr\frac{(2r^{2}+1)\exp{(-r^{2})}}{\sqrt{4r^{2}\exp{(-2r^{2})}+1}}=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}\frac{(2r^{2}+1)rdr}{\sqrt{4r^{2}+\exp{2r^{2}}}}
             \end{equation*}
         \end{enumerate}
-        \item ストークスの定理から
+        \item Greenの定理から
+        \begin{equation*}
+            \int_{\Gamma}(\sin{x}+e^{x})\sin{y}dx+(\cos{x}+e^{x})\cos{y}dy=\iint_{S}\left \{-\frac{\partial}{\partial y}(\sin{x}+e^{x})\sin{y}+\frac{\partial}{\partial x}(\cos{x}+e^{x})\cos{y}\right \}dxdy
+        \end{equation*}
+        \begin{equation*}
+            =\iint_{S}\{-(\sin{x}+e^{x})\cos{y}+(-\sin{x}+e^{x})\cos{y}\}dxdy=\iint_{S}(-2\sin{x}\cos{y})e^{x}dxdy
+        \end{equation*}
     \end{enumerate}
     %
 \end{document}
