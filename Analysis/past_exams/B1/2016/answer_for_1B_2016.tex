@@ -212,10 +212,47 @@
         \end{enumerate}
         \item Greenの定理から
         \begin{equation*}
-            \int_{\Gamma}(\sin{x}+e^{x})\sin{y}dx+(\cos{x}+e^{x})\cos{y}dy=\iint_{S}\left \{-\frac{\partial}{\partial y}(\sin{x}+e^{x})\sin{y}+\frac{\partial}{\partial x}(\cos{x}+e^{x})\cos{y}\right \}dxdy
+            I=\int_{\Gamma}(\sin{x}+e^{x})\sin{y}dx+(\cos{x}+e^{x})\cos{y}dy=\iint_{S}\left \{-\frac{\partial}{\partial y}(\sin{x}+e^{x})\sin{y}+\frac{\partial}{\partial x}(\cos{x}+e^{x})\cos{y}\right \}dxdy
         \end{equation*}
         \begin{equation*}
-            =\iint_{S}\{-(\sin{x}+e^{x})\cos{y}+(-\sin{x}+e^{x})\cos{y}\}dxdy=\iint_{S}(-2\sin{x}\cos{y})dxdy
+            =\iint_{S}\{-(\sin{x}+e^{x})\cos{y}+(-\sin{x}+e^{x})\cos{y}\}dxdy=\iint_{S}(-2\sin{x}\cos{y})dxdy. 
+        \end{equation*}
+        ここで
+        \begin{equation*}
+            u=\frac{1}{\sqrt{2}}(x+y),v=\frac{1}{\sqrt{2}}(-x+y)
+        \end{equation*}
+        と変数変換すると, 
+        \begin{equation*}
+            S=\left\{(u,v)\middle| 0\leq u\leq\frac{\sqrt{2}\pi}{4},0\leq v\leq \frac{\sqrt{2}\pi}{6}\right\}
+        \end{equation*}
+        \begin{equation*}
+            x=\frac{1}{\sqrt{2}}(u-v),y=\frac{1}{\sqrt{2}}(u+v).
+        \end{equation*}
+        \begin{equation*}
+            J(u,v)=\left|\begin{array}{cc}
+                \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\\
+                \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+            \end{array}\right|=1
+        \end{equation*}
+        \begin{equation*}
+            \therefore I=\int_{0}^{\frac{\sqrt{2}\pi}{4}}du\int_{0}^{\frac{\sqrt{2}\pi}{6}}dv-2\sin{\frac{1}{\sqrt{2}}(u-v)}\cos{\frac{1}{\sqrt{2}}(u+v)}
+        \end{equation*}
+        積和の公式から
+        \begin{equation*}
+            \sin{\frac{1}{\sqrt{2}}(u-v)}\cos{\frac{1}{\sqrt{2}}(u+v)}=\frac{1}{2}(\sin{\sqrt{2}u}-\sin{\sqrt{2}v})
+        \end{equation*}
+        だから,
+        \begin{equation*}
+            I=\int_{0}^{\frac{\sqrt{2}\pi}{4}}du\int_{0}^{\frac{\sqrt{2}\pi}{6}}dv(-\sin{\sqrt{2}u}+\sin{\sqrt{2}v})
+        \end{equation*}
+        \begin{equation*}
+            =\int_{0}^{\frac{\sqrt{2}\pi}{4}}{\left[-v\sin{\sqrt{2}u}+\frac{1}{\sqrt{2}}\cos{\sqrt{2}v}\right]}_{0}^{\frac{\sqrt{2}\pi}{6}}du=\int_{0}^{\frac{\sqrt{2}\pi}{4}}{\left[-\frac{\sqrt{2}\pi}{6}\sin{\sqrt{2}u}+\frac{1}{2\sqrt{2}}-\frac{1}{\sqrt{2}}\right]}du
+        \end{equation*}
+        \begin{equation*}
+            =\left[\frac{\pi}{6}\cos{\sqrt{2}u}-\frac{u}{\sqrt{2}}\right]_{0}^{\frac{\sqrt{2}\pi}{4}}=0-\frac{\pi}{4}-\frac{\pi}{6}
+        \end{equation*}
+        \begin{equation*}
+            =\frac{\pi}{12}.
         \end{equation*}
     \end{enumerate}
     %
