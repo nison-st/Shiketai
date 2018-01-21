@@ -184,9 +184,13 @@
             \begin{equation*}
                 \bm{f}\cdot\bm{n}=\frac{\{2(x^{2}+y^{2})+1\}\exp{(-(x^{2}+y^{2}))}}{\sqrt{4(x^{2}+y^{2})\exp{(-2(x^{2}+y^{2}))}+1}}
             \end{equation*}
+            また\(dS\)は
+            \begin{equation*}
+                dS=\sqrt{1+\varphi_{x}^{2}+\varphi_{y}^{2}}dxdy=\sqrt{4(x^{2}+y^{2})\exp{-2(x^{2}-y^{2})}+1}
+            \end{equation*}
             從って求める面積分は
             \begin{equation*}
-            S=\iint_{\mathcal{D}}\frac{\{2(x^{2}+y^{2})+1\}\exp{(-(x^{2}+y^{2}))}}{\sqrt{4(x^{2}+y^{2})\exp{(-2(x^{2}+y^{2}))}+1}}dxdy
+            S=\iint_{\mathcal{D}}\bm{f}\cdot\bm{n}dS=\iint_{\mathcal{D}}\{2(x^{2}+y^{2})+1\}\exp(-x^{2}-y^{2})
             \end{equation*}
             ここで
             \begin{equation*}
@@ -194,7 +198,16 @@
             \end{equation*}
             と変数変換すると, 
             \begin{equation*}
-                S=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}rdr\frac{(2r^{2}+1)\exp{(-r^{2})}}{\sqrt{4r^{2}\exp{(-2r^{2})}+1}}=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}\frac{(2r^{2}+1)rdr}{\sqrt{4r^{2}+\exp{2r^{2}}}}
+                S=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}rdr(2r^{2}+1)\exp{(-r^{2})}=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}(2r^{2}+1)r\exp(-r^{2})dr
+            \end{equation*}
+            \begin{equation*}
+                =\int_{0}^{\frac{\pi}{2}}d\theta\left\{{\left[-\frac{1}{2}(2r^{2}+1)\exp(-r^{2})\right]}_{0}^{\infty}+\int_{0}^{\infty}\frac{1}{2}(4r)\exp(-r^{2})dr\right\}
+            \end{equation*}
+            \begin{equation*}
+                =\int_{0}^{\frac{\pi}{2}}d\theta\left(\frac{1}{2}+{[-\exp(-r^{2})]}_{0}^{\infty}\right)=\frac{3}{2}\frac{\pi}{2}
+            \end{equation*}
+            \begin{equation*}
+                =\frac{3}{4}\pi
             \end{equation*}
         \end{enumerate}
         \item Greenの定理から
