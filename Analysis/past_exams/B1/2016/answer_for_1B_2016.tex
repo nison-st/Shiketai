@@ -220,7 +220,7 @@
         \begin{figure}[tbh]
             \centering
             \includegraphics[height=7cm]{plot_gamma.png}
-            \caption{経路\(\Gamma\) }
+            \caption{経路\(\Gamma\). }
         \end{figure}
         ここで
         \begin{equation*}
@@ -241,16 +241,18 @@
                 \frac{1}{\sqrt{2}}(u+v)
             \end{bmatrix}
         \end{equation*}
-        と変数変換すると, 
+        と変数変換すると, 積分範囲は
         \begin{equation*}
             S=\left \{(u,v)\middle| 0\leq u\leq\frac{\sqrt{2}\pi}{4},0\leq v\leq \frac{\sqrt{2}\pi}{6}\right \}
         \end{equation*}
+        ヤコビ行列式は
         \begin{equation*}
             J(u,v)=\left|\begin{array}{cc}
                 \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\\
                 \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
             \end{array}\right|=1
         \end{equation*}
+        したがって求める積分は
         \begin{equation*}
             \therefore I=\int_{0}^{\frac{\sqrt{2}\pi}{4}}du\int_{0}^{\frac{\sqrt{2}\pi}{6}}dv-2\sin{\frac{1}{\sqrt{2}}(u-v)}\cos{\frac{1}{\sqrt{2}}(u+v)}
         \end{equation*}
