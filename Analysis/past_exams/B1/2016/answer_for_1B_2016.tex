@@ -219,14 +219,26 @@
         \end{equation*}
         ここで
         \begin{equation*}
-            u=\frac{1}{\sqrt{2}}(x+y),v=\frac{1}{\sqrt{2}}(-x+y)
+            \begin{bmatrix}
+                x\\
+                y
+            \end{bmatrix}
+            =\begin{bmatrix}
+                \cos{\frac{\pi}{4}} & -\sin{\frac{\pi}{4}}\\
+                \sin{\frac{\pi}{4}} & \cos{\frac{\pi}{4}}
+            \end{bmatrix}
+            \begin{bmatrix}
+                x\\
+                y
+            \end{bmatrix}
+            =\begin{bmatrix}
+                \frac{1}{\sqrt{2}}(u-v)\\
+                \frac{1}{\sqrt{2}}(u;v)
+            \end{bmatrix}
         \end{equation*}
         と変数変換すると, 
         \begin{equation*}
             S=\left\{(u,v)\middle| 0\leq u\leq\frac{\sqrt{2}\pi}{4},0\leq v\leq \frac{\sqrt{2}\pi}{6}\right\}
-        \end{equation*}
-        \begin{equation*}
-            x=\frac{1}{\sqrt{2}}(u-v),y=\frac{1}{\sqrt{2}}(u+v).
         \end{equation*}
         \begin{equation*}
             J(u,v)=\left|\begin{array}{cc}
