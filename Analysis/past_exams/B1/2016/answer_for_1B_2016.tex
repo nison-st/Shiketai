@@ -201,7 +201,7 @@
                 S=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}rdr(2r^{2}+1)\exp{(-r^{2})}=\int_{0}^{\frac{\pi}{2}}d\theta\int_{0}^{\infty}(2r^{2}+1)r\exp(-r^{2})dr
             \end{equation*}
             \begin{equation*}
-                =\int_{0}^{\frac{\pi}{2}}d\theta\left\{{\left[-\frac{1}{2}(2r^{2}+1)\exp(-r^{2})\right]}_{0}^{\infty}+\int_{0}^{\infty}\frac{1}{2}(4r)\exp(-r^{2})dr\right\}
+                =\int_{0}^{\frac{\pi}{2}}d\theta\left \{{\left[-\frac{1}{2}(2r^{2}+1)\exp(-r^{2})\right]}_{0}^{\infty}+\int_{0}^{\infty}\frac{1}{2}(4r)\exp(-r^{2})dr\right \}
             \end{equation*}
             \begin{equation*}
                 =\int_{0}^{\frac{\pi}{2}}d\theta\left(\frac{1}{2}+{[-\exp(-r^{2})]}_{0}^{\infty}\right)=\frac{3}{2}\frac{\pi}{2}
@@ -217,6 +217,11 @@
         \begin{equation*}
             =\iint_{S}\{-(\sin{x}+e^{x})\cos{y}+(-\sin{x}+e^{x})\cos{y}\}dxdy=\iint_{S}(-2\sin{x}\cos{y})dxdy. 
         \end{equation*}
+        \begin{figure}[tbh]
+            \centering
+            \includegraphics[height=7cm]{plot_gamma.png}
+            \caption{経路\(\Gamma\) }
+        \end{figure}
         ここで
         \begin{equation*}
             \begin{bmatrix}
@@ -238,7 +243,7 @@
         \end{equation*}
         と変数変換すると, 
         \begin{equation*}
-            S=\left\{(u,v)\middle| 0\leq u\leq\frac{\sqrt{2}\pi}{4},0\leq v\leq \frac{\sqrt{2}\pi}{6}\right\}
+            S=\left \{(u,v)\middle| 0\leq u\leq\frac{\sqrt{2}\pi}{4},0\leq v\leq \frac{\sqrt{2}\pi}{6}\right \}
         \end{equation*}
         \begin{equation*}
             J(u,v)=\left|\begin{array}{cc}
@@ -261,7 +266,7 @@
             =\int_{0}^{\frac{\sqrt{2}\pi}{4}}{\left[-v\sin{\sqrt{2}u}+\frac{1}{\sqrt{2}}\cos{\sqrt{2}v}\right]}_{0}^{\frac{\sqrt{2}\pi}{6}}du=\int_{0}^{\frac{\sqrt{2}\pi}{4}}{\left[-\frac{\sqrt{2}\pi}{6}\sin{\sqrt{2}u}+\frac{1}{2\sqrt{2}}-\frac{1}{\sqrt{2}}\right]}du
         \end{equation*}
         \begin{equation*}
-            =\left[\frac{\pi}{6}\cos{\sqrt{2}u}-\frac{u}{\sqrt{2}}\right]_{0}^{\frac{\sqrt{2}\pi}{4}}=0-\frac{\pi}{4}-\frac{\pi}{6}
+            ={\left[\frac{\pi}{6}\cos{\sqrt{2}u}-\frac{u}{\sqrt{2}}\right]}_{0}^{\frac{\sqrt{2}\pi}{4}}=0-\frac{\pi}{4}-\frac{\pi}{6}
         \end{equation*}
         \begin{equation*}
             =-\frac{\pi}{12}.
