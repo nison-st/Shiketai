@@ -1180,7 +1180,7 @@
 を\(f\)の表現行列という.
 \begin{leftbar}
     \begin{defn}行列の積\par
-        有限次元ベクトル空間から
+        \(\)
     \end{defn}
 \end{leftbar}
 \section{有限次元ベクトル空間}
@@ -1458,21 +1458,36 @@
     \end{defn}
 \end{leftbar}
 \part{線形常微分方程式}
+\section{線形常微分方程式}
 \begin{leftbar}
     \begin{defn}斉次微分方程式\par
         \begin{equation}
-            \frac{d^{n}f}{dx^{n}}+\cdots+\frac{df}{dx}=0
+            \frac{d^{n}f}{dx^{n}}+a_{1}\frac{d^{n-1}f}{dx^{n-1}}+\cdots+a_{n-1}\frac{df}{dx}+a_{n}f=0
         \end{equation}
-        の形の微分方程式を斉次微分方程式という. 
+        の形の微分方程式を\textbf{斉次微分方程式}という. 
     \end{defn}
 \end{leftbar}
 \begin{leftbar}
     \begin{defn}非斉次微分方程式\par
         \begin{equation}
-            \frac{d^{n}f}{dx^{n}}+\cdots+\frac{df}{dx}=b(x)
+            \frac{d^{n}f}{dx^{n}}+a_{1}\frac{d^{n-1}f}{dx^{n-1}}+\cdots+a_{n-1}\frac{df}{dx}+a_{n}f=b(x)
         \end{equation}
-        の形の微分方程式を非斉次微分方程式という. 
+        の形の微分方程式を\textbf{非斉次微分方程式}という. 
     \end{defn}
+\end{leftbar}
+\begin{leftbar}
+    \begin{prop}斉次微分方程の解法\par
+        斉次微分方程式
+        \begin{equation*}
+            \frac{d^{n}f}{dx^{n}}+a_{1}\frac{d^{n-1}f}{dx^{n-1}}+\cdots+a_{n}\frac{df}{dx}+a_{n}f=0
+        \end{equation*}
+        を満たす関数\(f\)を求めるには, 
+        \begin{equation}
+            y_{i}:=\frac{d^{i}f}{dx^{i}}
+        \end{equation}
+        とおいて,
+        
+    \end{prop}
 \end{leftbar}
 \begin{thebibliography}{9}
     \bibitem{linear-algebla}白岩謙一. 基礎課程 線形代数入門. 初版, サイエンス社, 1976, 244p.
