@@ -24,6 +24,17 @@ Chmistry
 
 - ChemD:化学D
 
+Physics
+----
+
+- PhysA:物理学A
+
+- PhysB:物理学B
+
+- PhysC:物理学C
+
+- PhysD:物理学D
+
 Biology
 ----
 
