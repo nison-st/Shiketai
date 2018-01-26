@@ -1,0 +1,87 @@
+\documentclass[a4paper,10pt,report]{amsart}
+    \usepackage{amsfonts,booktabs,listings,siunitx}
+    \usepackage[dvipdfmx]{graphicx}
+    %
+    \lstset{
+        frame=single,
+        numbers=left,
+        tabsize=2
+    }
+    %
+    \newcommand{\Tabref}[1]{表\ref{#1}}
+    \newcommand{\Equref}[1]{式 (\ref{#1})}
+    \newcommand{\Figref}[1]{図\ref{#1}}
+    %
+    \title{Answer for 2015 1B exam}
+    \date{\today}
+    \author{Naoki Yano}
+    %
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+        \item \(\tan\cfrac{x}{2}=t\)とおくと
+        \begin{equation*}
+            dx=\frac{2dt}{1+t^{2}},\cos{x}=\frac{1-t^{2}}{1+t^{2}}. 
+        \end{equation*}
+        積分範囲は
+        \begin{equation*}
+            0\leq t\leq\sqrt{3}
+        \end{equation*}
+        從って
+        \begin{equation*}
+            I=\int_{0}^{\sqrt{3}}\cfrac{1}{5+4\cfrac{1+t^{2}}{1-t^{2}}}\cdot\frac{2}{1+t^{2}}dt
+        \end{equation*}
+        \begin{equation*}
+            =\int_{0}^{\sqrt{3}}\cfrac{2}{9+t^{2}}={\left[\frac{2}{3}\mathrm{Tan}^{-1}\frac{t}{3}\right]}_{0}^{\sqrt{3}}
+        \end{equation*}
+        \begin{equation*}
+            =\frac{2}{3}\left(\mathrm{Tan}^{-1}\frac{1}{\sqrt{3}}-\mathrm{Tan}^{-1}0\right)=\frac{2}{3}\frac{\pi}{6}
+        \end{equation*}
+        \begin{equation*}
+            =\frac{\pi}{9}
+        \end{equation*}
+        \item 積分順序を交換すると, 
+        \begin{equation*}
+            I=\int_{\frac{1}{2}}^{\frac{\sqrt{2}}{2}}dx\int_{-\sqrt{4x^{2}-1}}^{\sqrt{4x^{2}-1}}\frac{dy}{\sqrt{(1-4x^{2})(x^{2}-1)}}
+        \end{equation*}
+        \begin{equation*}
+            =\int_{\frac{1}{2}}^{\frac{\sqrt{2}}{2}}\frac{2dx}{\sqrt{1-x^{2}}}=2{\left[\mathrm{Tan}^{-1}x\right]}_{\frac{1}{2}}^{\frac{\sqrt{2}}{2}}=2\left(\frac{\pi}{4}-\frac{\pi}{6}\right)
+        \end{equation*}
+        \begin{equation*}
+            =\frac{\pi}{6}
+        \end{equation*}
+        \item 
+        \begin{equation*}
+            \begin{cases}
+                x=\frac{1}{2}u\\
+                y=v-u
+            \end{cases}
+        \end{equation*}
+        とすれば積分範囲は
+        \begin{equation*}
+            D'=\{(u,v)\mid 0\leq v\leq 1,u\geq 0,v-u\geq0\}
+        \end{equation*}
+        ヤコビ行列式は
+        \begin{equation*}
+            J=\left|\begin{array}{cc}
+                \frac{1}{2} & 0 \\
+                -1 & 1
+            \end{array}\right|=\frac{1}{2}
+        \end{equation*}
+        被積分関数は
+        \begin{equation*}
+            \exp{\left(\frac{2x}{2x+y+1}\right)}=\exp{\left(\frac{u}{v+1}\right)}
+        \end{equation*}
+        從って求める定積分は
+        \begin{equation*}
+            I=\frac{1}{2}\int_{0}^{1}dv\int_{0}^{v}du\exp{\left(\frac{u}{v+1}\right)}
+        \end{equation*}
+        \begin{equation*}
+            =\int_{0}^{1}dv{\left[(v+1)\exp{\left(\frac{u}{v+1}\right)}\right]}_{0}^{v}=\int_{0}^{1}dv\left \{(v+1)\exp{\left(\frac{v}{v+1}\right)}-\exp{v}\right \}
+        \end{equation*}
+        \item 
+        \item 
+        \item 
+    \end{enumerate}
+    %
+\end{document}
