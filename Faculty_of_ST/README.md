@@ -9,6 +9,8 @@ Mathematics
 
 - Math1B:数学1Bまたは数学B2
 
+- Math2A:数学2Aまたは数学A2
+
 - Math2B:数学2Bまたは数学B2
 
 Chmistry
